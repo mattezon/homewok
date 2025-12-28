@@ -14,19 +14,33 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* flex-direction: column; */
-	gap:25px;
+	flex-direction: column;
+	gap: 5px;
 }
 
 .data {
 	padding: 10px;
 	display: flex;
-	/* flex-direction: column; */
+	flex-direction: column;
 	gap: 3px;
 	border: 2px solid black;
 }
-.function_container{display: flex;
+
+.products {
+	display: flex;
+	gap: 10px;
+}
+
+.product {
+	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	flex-direction: column;
-	gap: 5px;}
+	gap: 5px;
+}
+
+.product > img {
+	object-fit: cover;
+	width: 100px;
+	height: 100px;
+}

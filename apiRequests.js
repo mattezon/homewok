@@ -3,7 +3,7 @@ export const getData = url => {
 		fetch(url)
 			.then(response => response.json())
 			.then(json => resolve(json))
-			.catch(error => alert(error))
+			.catch(error => reject(error))
 	)
 }
 
@@ -16,7 +16,7 @@ export const postData = (url, data) => {
 		})
 			.then(res => res.json())
 			.then(json => resolve(json))
-			.catch(err => alert(err))
+			.catch(err => reject(err))
 	)
 }
 
@@ -29,7 +29,7 @@ export const patchData = (url, id, updatedData) => {
 		})
 			.then(res => res.json())
 			.then(json => resolve(json))
-			.catch(err => alert(err))
+			.catch(err => reject(err))
 	)
 }
 
@@ -42,6 +42,6 @@ export const deleteData = (url, id) => {
 				if (res.ok) resolve('Данные успешно удалены')
 				else reject('Ошибка удаления данных')
 			})
-			.catch(err => alert(err))
+			.catch(err => reject(err))
 	)
 }

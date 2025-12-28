@@ -1,31 +1,54 @@
 {
   "posts": [
     {
-      "id": "1",
-      "title": "redacted",
-      "views": null
-    },
-    {
       "id": "2",
       "title": "dfas",
       "views": 59999
     },
     {
-      "id": "3",
-      "title": "mmm",
-      "views": 800
+      "id": "4",
+      "title": "new_post",
+      "views": 500
+    },
+    {
+      "id": "5",
+      "title": "ffffff",
+      "views": 11111
     }
   ],
   "comments": [
     {
       "id": "1",
       "text": "a comment about post 1",
-      "postId": "1"
+      "postId": null
     },
     {
       "id": "2",
       "text": "another comment about post 1",
-      "postId": "1"
+      "postId": null
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "title": "Ноутбук",
+      "price": 59999,
+      "img": "https://cdn-imgix.headout.com/microbrands-content-image/image/08108cfce4b29aaec3befbd2f4e910c6-Sentosa%204D%20Adventureland%20_%20Singapore_.jpg?auto=format&w=510.8727272727273&h=401.4&q=90&ar=14%3A11&crop=faces&fit=crop",
+      "discountTime": 384
+    },
+    {
+      "id": "2",
+      "title": "Телефон",
+      "price": 39999,
+      "img": "https://cdn-imgix.headout.com/microbrands-content-image/image/08108cfce4b29aaec3befbd2f4e910c6-Sentosa%204D%20Adventureland%20_%20Singapore_.jpg?auto=format&w=510.8727272727273&h=401.4&q=90&ar=14%3A11&crop=faces&fit=crop",
+      "discountTime": 384
+    },
+    {
+      "id": "3",
+      "title": "Шапка-ушанка",
+      "price": 199999,
+      "img": "https://cdn-imgix.headout.com/microbrands-content-image/image/08108cfce4b29aaec3befbd2f4e910c6-Sentosa%204D%20Adventureland%20_%20Singapore_.jpg?auto=format&w=510.8727272727273&h=401.4&q=90&ar=14%3A11&crop=faces&fit=crop",
+      "discountTime": 384
     }
   ]
 }
