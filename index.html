@@ -1,36 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
-		<link rel="stylesheet" href="style.css" />
-	</head>
-	<body>
-		<h2>ПОЛУЧЕНИЕ</h2>
-		<div class="container"></div>
-		<button class="get-data-btn">Получить данные</button>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-tasks"></i> Управление задачами</h1>
+            <p class="subtitle">Простое приложение для управления задачами с использованием JSON-сервера</p>
+        </header>
 
-		<h2>ДОБАВЛЕНИЕ</h2>
-		<input class="new-data" type="text" />
-		<button class="add-data-btn">Отправить данные</button>
+        <div class="app-wrapper">
+            <div class="left-panel">
+                <section class="add-task">
+                    <h2><i class="fas fa-plus-circle"></i> Добавить новую задачу</h2>
+                    <form id="taskForm">
+                        <div class="form-group">
+                            <label for="title">Название задачи*</label>
+                            <input type="text" id="title" required placeholder="Введите название задачи">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="description">Описание задачи</label>
+                            <textarea id="description" placeholder="Введите описание задачи (необязательно)"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="priority">Приоритет</label>
+                            <select id="priority">
+                                <option value="низкий">Низкий</option>
+                                <option value="средний" selected>Средний</option>
+                                <option value="высокий">Высокий</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Добавить задачу
+                        </button>
+                    </form>
+                </section>
 
-		<h2>ИЗМЕНЕНИЕ</h2>
-		<input class="patch-id-input" type="text" placeholder="id" />
-		<input class="patch-data-input" type="text" placeholder="new data" />
-		<button class="patch-data-btn">Отправить данные</button>
+                <section class="filters">
+                    <h2><i class="fas fa-filter"></i> Фильтры и сортировка</h2>
+                    
+                    <div class="filter-group">
+                        <h3>Фильтр по статусу</h3>
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-filter="all">Все задачи</button>
+                            <button class="filter-btn" data-filter="active">Активные</button>
+                            <button class="filter-btn" data-filter="completed">Выполненные</button>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h3>Сортировка</h3>
+                        <select id="sortSelect" class="sort-select">
+                            <option value="newest">Сначала новые</option>
+                            <option value="oldest">Сначала старые</option>
+                            <option value="priority">По приоритету</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h3>Статистика</h3>
+                        <div class="stats">
+                            <p>Всего задач: <span id="totalTasks">0</span></p>
+                            <p>Выполнено: <span id="completedTasks">0</span></p>
+                            <p>Активных: <span id="activeTasks">0</span></p>
+                        </div>
+                    </div>
+                </section>
+            </div>
 
-		<h2>УДАЛЕНИЕ</h2>
-		<input class="delete-id-input" type="text" placeholder="id" />
-		<button class="delete-data-btn">Удалить данные</button>
+            <div class="right-panel">
+                <section class="tasks-list">
+                    <div class="tasks-header">
+                        <h2><i class="fas fa-list"></i> Список задач</h2>
+                        <button id="refreshBtn" class="btn btn-secondary">
+                            <i class="fas fa-sync-alt"></i> Обновить
+                        </button>
+                    </div>
+                    
+                    <div id="tasksContainer">
+                        <div class="loading">
+                            <i class="fas fa-spinner fa-spin"></i> Загрузка задач...
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
 
-		<h2>РАБОТА С ТОВАРОМ</h2>
-		<button class="get-products-btn">Получить товар</button>
-		<button class="stop-timer-btn">Остановить таймер</button> 
-		<ul class="products"></u>
+        <footer>
+            <p>To-Do List приложение с использованием json-server &copy; 2026</p>
+            <p class="server-status">Статус сервера: <span id="serverStatus">Проверка...</span></p>
+        </footer>
+    </div>
 
-		
+    <!-- Модальное окно для редактирования -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-edit"></i> Редактирование задачи</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm">
+                    <input type="hidden" id="editId">
+                    
+                    <div class="form-group">
+                        <label for="editTitle">Название задачи*</label>
+                        <input type="text" id="editTitle" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="editDescription">Описание задачи</label>
+                        <textarea id="editDescription"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="editPriority">Приоритет</label>
+                        <select id="editPriority">
+                            <option value="низкий">Низкий</option>
+                            <option value="средний">Средний</option>
+                            <option value="высокий">Высокий</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="editCompleted">
+                            Задача выполнена
+                        </label>
+                    </div>
+                    
+                    <div class="modal-buttons">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Сохранить изменения
+                        </button>
+                        <button type="button" class="btn btn-secondary close-modal">
+                            <i class="fas fa-times"></i> Отмена
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-		<script type="module" src="index.js"></script>
-	</body>
+    <script src="script.js" type="module"></script>
+</body>
 </html>
