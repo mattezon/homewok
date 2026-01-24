@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "name": "Иван Петров",
+    "grades": {
+      "math": 4.0,
+      "physics": 4.0,
+      "literature": 4.5
+    }
+  },
+  {
+    "id": 2,
+    "name": "Мария Сидорова",
+    "grades": {
+      "math": 5.0,
+      "physics": 5.0,
+      "literature": 4.6
+    }
+  },
+  {
+    "id": 3,
+    "name": "Анна Коваль",
+    "grades": {
+      "math": 5.0,
+      "physics": 4.9,
+      "literature": 4.1
+    }
+  },
+  {
+    "id": 4,
+    "name": "Игорь Семак",
+    "grades": {
+      "math": 2.3,
+      "physics": 2.1,
+      "literature": 2.2
+    }
+  },
+  {
+    "id": 5,
+    "name": "Виктор Петренко",
+    "grades": {
+      "math": 3.5,
+      "physics": 3.5,
+      "literature": 3.6
+    }
+  }
+]
