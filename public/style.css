@@ -1,0 +1,14 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    color: #ff0000;
+}
+
+nav {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #00ff4448;
+}
